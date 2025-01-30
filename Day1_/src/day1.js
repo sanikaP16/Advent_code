@@ -1,13 +1,14 @@
-const readModuleMasses = () => {
-  const data = Deno.readTextFileSync("../data/data.txt");
+const readModuleMasses = (filePath) => {
+  const data = Deno.readTextFileSync(filePath);
   return data.split("\n").map(Number);
 };
+
 const calculateFuelForModule = (mass) => Math.floor(mass / 3) - 2;
 
 const sum = (acum, value) => acum + value;
 
 const calculateTotalFuel = () => {
-  const moduleMasses = readModuleMasses();
+  const moduleMasses = readModuleMasses("../data/data.txt");
   const totalFuel = moduleMasses.map(calculateFuelForModule).reduce(sum, 0);
   return totalFuel;
 };
@@ -23,7 +24,7 @@ const getFuel = (mass) => {
 };
 
 const computeTotalFuel = () => {
-  const moduleMasses = readModuleMasses();
+  const moduleMasses = readModuleMasses("../data/data.txt");
   const totalFuel = moduleMasses.map(getFuel).reduce(sum, 0);
   return totalFuel;
 };
