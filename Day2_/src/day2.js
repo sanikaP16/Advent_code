@@ -1,5 +1,41 @@
+const intCodeExecution = (inputData) => {
+  let index = 0;
+  const data = [...inputData];
+
+  while (index < data.length) {
+    if (data[index] === 1) {
+      data[data[index + 3]] = data[data[index + 1]] + data[data[index + 2]];
+      index = index + 4;
+    }
+    if (data[index] === 2) {
+      data[data[index + 3]] = data[data[index + 1]] * data[data[index + 2]];
+      index = index + 4;
+    }
+    if (data[index] === 99) {
+      break;
+    }
+  }
+
+  return data;
+};
+
+const findInputsForTarget = (originalData, target) => {
+  for (let noun = 0; noun <= 99; noun++) {
+    for (let verb = 0; verb <= 99; verb++) {
+      const data = [...originalData];
+      data[1] = noun;
+      data[2] = verb;
+
+      if (intCodeExecution(data)[0] === target) {
+        return 100 * noun + verb;
+      }
+    }
+  }
+
+  return -1;
+};
+
 const main = () => {
-  // const data = [1, 9, 10, 3, 2, 3, 11, 0, 99, 30, 40, 50];
   const data = [
     1, 12, 2, 3, 1, 1, 2, 3, 1, 3, 4, 3, 1, 5, 0, 3, 2, 1, 10, 19, 2, 9, 19, 23,
     2, 23, 10, 27, 1, 6, 27, 31, 1, 31, 6, 35, 2, 35, 10, 39, 1, 39, 5, 43, 2,
@@ -10,20 +46,9 @@ const main = () => {
     127, 1, 127, 5, 0, 99, 2, 14, 0, 0,
   ];
 
-  let i = 0;
-  while (i < data.length) {
-    if (data[i] === 1) {
-      data[data[i + 3]] = data[data[i + 1]] + data[data[i + 2]];
-      i = i + 4;
-    }
-    if (data[i] === 2) {
-      data[data[i + 3]] = data[data[i + 1]] * data[data[i + 2]];
-      i = i + 4;
-    }
-    if (data[i] === 99) {
-      i = data.length;
-    }
-  }
-  console.log(data);
+  console.log(intCodeExecution(data));
+
+  console.log(findInputsForTarget(data, 19690720));
 };
+
 main();
