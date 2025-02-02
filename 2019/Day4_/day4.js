@@ -1,7 +1,12 @@
 const hasSameDigits = (number) => {
   const array = String(number).split("");
+  const counts = {};
 
-  return array.some((element, index) => element === array[index + 1]);
+  for (let digit of array) {
+    counts[digit] = (counts[digit] || 0) + 1;
+  }
+
+  return Object.values(counts).includes(2);
 };
 
 const isOrderCorrect = (number) => {
