@@ -2,7 +2,7 @@ const hasSameDigits = (number) => {
   const array = String(number).split("");
   const counts = {};
 
-  for (let digit of array) {
+  for (const digit of array) {
     counts[digit] = (counts[digit] || 0) + 1;
   }
 
