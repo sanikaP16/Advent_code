@@ -38,7 +38,8 @@ Then, if the second wire's path is U7,R6,D4,L4, it goes up 7, right 6, down 4, a
 ...........
 ```
 
-These wires cross at two locations (marked X), but the lower-left one is closer to the central port: its distance is 3 + 3 = 6.
+These wires cross at two locations (marked X), but the lower-left one is closer to the central port:
+its distance is 3 + 3 = 6.
 
 Here are a few more examples:
 
