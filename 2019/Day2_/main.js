@@ -1,19 +1,16 @@
 const intCodeExecution = (inputData) => {
-  let index = 0;
   const data = [...inputData];
+  const operations = {
+    1: (data, index) =>
+      (data[data[index + 3]] = data[data[index + 1]] + data[data[index + 2]]),
+    2: (data, index) =>
+      (data[data[index + 3]] = data[data[index + 1]] * data[data[index + 2]]),
+  };
 
-  while (index < data.length) {
-    if (data[index] === 1) {
-      data[data[index + 3]] = data[data[index + 1]] + data[data[index + 2]];
-      index = index + 4;
-    }
-    if (data[index] === 2) {
-      data[data[index + 3]] = data[data[index + 1]] * data[data[index + 2]];
-      index = index + 4;
-    }
-    if (data[index] === 99) {
-      break;
-    }
+  for (let index = 0; index < data.length; index += 4) {
+    if (data[index] === 99) return data;
+
+    operations[data[index]](data, index);
   }
 
   return data;
@@ -26,9 +23,7 @@ const findInputsForTarget = (originalData, target) => {
       data[1] = noun;
       data[2] = verb;
 
-      if (intCodeExecution(data)[0] === target) {
-        return 100 * noun + verb;
-      }
+      if (intCodeExecution(data)[0] === target) return 100 * noun + verb;
     }
   }
 
