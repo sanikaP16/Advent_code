@@ -34,12 +34,23 @@ const getCoordinates = (wire) => {
 
   return visited;
 };
-const getDistance = () => {};
+
+const getManhattanDistance = (points) => {
+  const [x, y] = points.split(",").map(Number);
+  return Math.abs(x) + Math.abs(y);
+};
+
+const getDistance = ([...interSectingPoints]) => {
+  const distances = interSectingPoints.map(getManhattanDistance);
+  return Math.min(...distances);
+};
+
 const main = () => {
   const instructions = readInput("./input.txt");
   const [wire1, wire2] = instructions.map(getCoordinates);
   const intersection = wire1.intersection(wire2);
-  console.log(intersection);
+
+  console.log(getDistance(intersection));
 };
 
 main();
